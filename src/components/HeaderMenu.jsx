@@ -8,7 +8,7 @@ export const HeaderMenu = () => {
       position="fixed"
       elevation={0}
       sx={{ borderBottom: 1, borderColor: "#cccccc" }}
-      color="transparent"
+      color="white"
     >
       <Toolbar>
         <Typography variant="h6" color="#037ef3" component="div">
