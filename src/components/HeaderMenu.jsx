@@ -7,8 +7,8 @@ export const HeaderMenu = () => {
     <AppBar
       position="fixed"
       elevation={0}
-      sx={{ borderBottom: 1, borderColor: "#cccccc" }}
-      color="white"
+      sx={{ borderBottom: 1, borderColor: "#cccccc",backgroundColor: 'white' }}
+      
     >
       <Toolbar>
         <Typography variant="h6" color="#037ef3" component="div">
