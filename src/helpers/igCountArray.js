@@ -1,7 +1,7 @@
 export let igCountArray = [
   {
     id: 8723,
-    igName: "AIESEC in APIIT",
+    igName: "APIIT",
     apl: {
       GV: 0,
       GTa: 0,
@@ -23,7 +23,7 @@ export let igCountArray = [
   },
   {
     id: 8986,
-    igName: "AIESEC in ICBT",
+    igName: "ICBT",
     apl: {
       GV: 0,
       GTa: 0,
@@ -45,7 +45,7 @@ export let igCountArray = [
   },
   {
     id: 7997,
-    igName: "AIESEC in IIT",
+    igName: "IIT",
     apl: {
       GV: 0,
       GTa: 0,
@@ -67,7 +67,7 @@ export let igCountArray = [
   },
   {
     id: 11136,
-    igName: "AIESEC in Jaffna",
+    igName: "Jaffna",
     apl: {
       GV: 0,
       GTa: 0,
@@ -89,7 +89,7 @@ export let igCountArray = [
   },
   {
     id: 10231,
-    igName: "AIESEC in KDU",
+    igName: "KDU",
     apl: {
       GV: 0,
       GTa: 0,
@@ -111,7 +111,7 @@ export let igCountArray = [
   },
   {
     id: 13991,
-    igName: "AIESEC in Rajarata",
+    igName: "Rajarata",
     apl: {
       GV: 0,
       GTa: 0,
@@ -133,7 +133,7 @@ export let igCountArray = [
   },
   {
     id: 11570,
-    igName: "AIESEC in Saegis",
+    igName: "Saegis",
     apl: {
       GV: 0,
       GTa: 0,
@@ -155,7 +155,7 @@ export let igCountArray = [
   },
   {
     id: 13106,
-    igName: "AIESEC in SLTC",
+    igName: "SLTC",
     apl: {
       GV: 0,
       GTa: 0,
@@ -177,7 +177,7 @@ export let igCountArray = [
   },
   {
     id: 11127,
-    igName: "AIESEC in SUSL",
+    igName: "SUSL",
     apl: {
       GV: 0,
       GTa: 0,
@@ -199,7 +199,7 @@ export let igCountArray = [
   },
   {
     id: 11119,
-    igName: "AIESEC in UWU",
+    igName: "UWU",
     apl: {
       GV: 0,
       GTa: 0,
@@ -221,7 +221,7 @@ export let igCountArray = [
   },
   {
     id: 37260,
-    igName: "AIESEC in Vavuniya",
+    igName: "Vavuniya",
     apl: {
       GV: 0,
       GTa: 0,
@@ -243,7 +243,51 @@ export let igCountArray = [
   },
   {
     id: 13990,
-    igName: "AIESEC in Wayamba",
+    igName: "Wayamba",
+    apl: {
+      GV: 0,
+      GTa: 0,
+      GTe: 0,
+      total: 0,
+    },
+    apd: {
+      GV: 0,
+      GTa: 0,
+      GTe: 0,
+      total: 0,
+    },
+    re: {
+      GV: 0,
+      GTa: 0,
+      GTe: 0,
+      total: 0,
+    },
+  },
+  {
+    id: 39484 ,
+    igName: "SKU",
+    apl: {
+      GV: 0,
+      GTa: 0,
+      GTe: 0,
+      total: 0,
+    },
+    apd: {
+      GV: 0,
+      GTa: 0,
+      GTe: 0,
+      total: 0,
+    },
+    re: {
+      GV: 0,
+      GTa: 0,
+      GTe: 0,
+      total: 0,
+    },
+  },
+  {
+    id: 39485 ,
+    igName: "EUSL",
     apl: {
       GV: 0,
       GTa: 0,

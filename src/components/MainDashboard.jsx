@@ -34,8 +34,8 @@ export const MainDasboard = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [passedDateRange, setPassedDateRange] = useState({
-    fromDate: "2024-05-01 00:00:00",
-    toDate: "2024-05-31 23:59:59",
+    fromDate: "2024-07-01 00:00:00",
+    toDate: "2024-07-31 23:59:59",
   });
 
   //const [dateRange, setDateRange] = useState(passedDateRange);
@@ -305,6 +305,30 @@ export const MainDasboard = () => {
     }
   });
 
+  const handleFromDateChange = (value) => {
+    const selectedDate = dayJs(value).format('YYYY-MM-DD');
+    if (dayJs(selectedDate).isAfter(passedDateRange.toDate)) {
+      console.error("Selected date cannot be after toDate.");
+      return;
+    }
+    setPassedDateRange((prev) => ({
+      ...prev,
+      fromDate: selectedDate + " 00:00:00",
+    }));
+  };
+  
+  const handleToDateChange = (value) => {
+    const selectedDate = dayJs(value).format('YYYY-MM-DD');
+    if (dayJs(selectedDate).isBefore(passedDateRange.fromDate)) {
+      console.error("Selected date cannot be before fromDate.");
+      return;
+    }
+    setPassedDateRange((prev) => ({
+      ...prev,
+      toDate: selectedDate + " 23:59:59",
+    }));
+  };
+  
   // const handleFromDateChange = (value) => {
   //   const updatedDateRange = { ...dateRange };
 
@@ -394,3 +418,5 @@ export const MainDasboard = () => {
     </div>
   );
 };
+
+console.log("MainDashboard.jsx");

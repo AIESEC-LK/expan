@@ -1,4 +1,5 @@
-import { Sheet, Table } from "@mui/joy";
+import React from "react";
+import { Sheet, Table, Button } from "@mui/joy";
 
 const MainTable = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -19,6 +20,61 @@ const MainTable = (props) => {
       <td>{element.re.total}</td>
     </tr>
   ));
+
+  const downloadCSV = () => {
+    const headers = [
+      "Entity",
+      "Applications GV",
+      "Applications GTa",
+      "Applications GTe",
+      "Applications Total",
+      "Approvals GV",
+      "Approvals GTa",
+      "Approvals GTe",
+      "Approvals Total",
+      "Realizations GV",
+      "Realizations GTa",
+      "Realizations GTe",
+      "Realizations Total",
+    ];
+
+    const csvRows = [
+      headers.join(","), // Join headers with a comma
+      ...props.tableContent.map((element) =>
+        [
+          element.igName,
+          element.apl.GV,
+          element.apl.GTa,
+          element.apl.GTe,
+          element.apl.total,
+          element.apd.GV,
+          element.apd.GTa,
+          element.apd.GTe,
+          element.apd.total,
+          element.re.GV,
+          element.re.GTa,
+          element.re.GTe,
+          element.re.total,
+        ].join(",")
+      ),
+    ];
+
+    const csvContent = csvRows.join("\n");
+
+    // Create a blob with the CSV data
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    // Create a link and trigger the download
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "table_data.csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <Sheet
       variant="plain"
@@ -29,6 +85,9 @@ const MainTable = (props) => {
         transition: "0.3s",
       }}
     >
+      <Button onClick={downloadCSV} sx={{ mb: 2 }}>
+        Download as CSV
+      </Button>
       <Table borderAxis="both" variant="soft" size="md">
         <thead>
           <tr>
