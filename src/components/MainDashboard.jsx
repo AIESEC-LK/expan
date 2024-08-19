@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { Stack, Button } from "@mui/material";
 import _, { set } from "lodash";
-import dayJs from "dayjs";
+import dayJs , { Dayjs }from "dayjs";
 
 import { useExpa } from "../hooks/useExpa";
 import { igCountArray } from "../helpers/igCountArray";
@@ -120,6 +120,7 @@ export const MainDasboard = () => {
         setIsReLoopFinished(false);
         setTriggerRefetch(false);
       }
+
     }, [triggerRefetch]);
 
 
@@ -206,9 +207,7 @@ export const MainDasboard = () => {
     isReLoopFinished,
   ]);
 
-  // console.log(aplData);
-  // console.log(apdData);
-  // console.log(reData);
+
 
   let duplicatedIgCountArray = _.cloneDeep(igCountArray);
 
@@ -389,6 +388,26 @@ export const MainDasboard = () => {
 
   };
 
+  const handleReset = () => {
+    const DateNow = new Date().toISOString();
+    const newDate = DateNow.slice(5, 10);
+    if (newDate >= "02-01") {
+      setPassedDateRange({
+        fromDate: DateNow.slice(0,4) +"-02-01 00:00:00",
+        toDate: DateNow.slice(0,13).replace("T", " ") + ":59",
+      });
+      
+    } else {
+      setPassedDateRange({
+        fromDate: (parseInt(DateNow.slice(0,4)) - 1) +"-02-01 00:00:00",
+        toDate: DateNow.slice(0,13).replace("T", " ") + ":59"
+    })
+    };
+    setTriggerRefetch(prev => !prev); 
+
+
+  }
+
   //console.log(duplicatedIgCountArray);
   //console.log(passedDateRange);
 
@@ -419,15 +438,14 @@ export const MainDasboard = () => {
                   }
                 )}              
               }
-              
-              //defaultValue={passedDateRange.fromDate}
-              // onChange={(v) => handleFromDateChange(v)}
+              defaultValue={dayjs(passedDateRange.fromDate.slice(0,10))}
             />
             <div>-</div>
             <DatePicker
               label="End Date"
               name="toDate"
               slotProps={{ textField: { size: "small" } }}
+              
               onChange={(v)=>{
                 const formated = dayjs(v).format("YYYY-MM-DD 23:59:59");
                 setPassedDateRange(
@@ -436,8 +454,8 @@ export const MainDasboard = () => {
                     toDate: formated
                   }
                 )}}
-              //defaultValue={passedDateRange.toDate}
-              // onChange={(v) => handleToDateChange(v)}
+                defaultValue={dayjs(passedDateRange.toDate.slice(0,10))}
+
             />
             <Button
               variant="outlined"
@@ -450,7 +468,20 @@ export const MainDasboard = () => {
               onClick={handleFetch}
               disableElevation
             >
-              Fetch
+              Search
+            </Button>
+            <Button
+              variant="outlined"
+              style={{
+                maxWidth: "80px",
+                maxHeight: "40px",
+                minWidth: "80px",
+                minHeight: "40px",
+              }}
+              onClick={handleReset}
+              disableElevation
+            >
+              Reset
             </Button>
           </Stack>
           <MainTable
