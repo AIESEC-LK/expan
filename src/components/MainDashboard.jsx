@@ -34,8 +34,8 @@ export const MainDasboard = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [passedDateRange, setPassedDateRange] = useState({
-    fromDate: "2024-07-01 00:00:00",
-    toDate: "2024-07-31 23:59:59",
+    fromDate: "2024-05-01 00:00:00",
+    toDate: "2024-06-30 23:59:59",
   });
 
   //const [dateRange, setDateRange] = useState(passedDateRange);
@@ -170,9 +170,31 @@ export const MainDasboard = () => {
   // console.log(apdData);
   // console.log(reData);
 
+  let totalsByProgram = {
+    totalAplGV: 0,
+    totalAplGTa: 0,
+    totalAplGTe: 0,
+    totalApl:0,
+    totalApdGV: 0,
+    totalApdGTa: 0,
+    totalApdGTe: 0,
+    totalApd:0,
+    totalReGV: 0,
+    
+    
+    totalReGTa: 0,
+    
+   
+    totalReGTe: 0,
+    totalRe:0,
+    totalMC:0
+    
+    
+  };
   let duplicatedIgCountArray = _.cloneDeep(igCountArray);
 
   //Total for the given time range.
+  
   aplData.forEach((yObj) => {
     const xObj = duplicatedIgCountArray.find(
       (x) => x?.id == yObj?.person?.lc_alignment?.id
@@ -184,18 +206,22 @@ export const MainDasboard = () => {
           case "GV":
             xObj.apl.GV++;
             xObj.apl.total++;
+            totalsByProgram.totalAplGV++
             break;
           case "GTa":
             xObj.apl.GTa++;
             xObj.apl.total++;
+            totalsByProgram.totalAplGTa++;;
             break;
           case "GTe":
             xObj.apl.GTe++;
             xObj.apl.total++;
+            totalsByProgram.totalAplGTe++;
             break;
           default:
             break;
         }
+        totalsByProgram.totalApl++
       }
 
       if (yObj?.date_approved) {
@@ -203,18 +229,22 @@ export const MainDasboard = () => {
           case "GV":
             xObj.apd.GV++;
             xObj.apd.total++;
+            totalsByProgram.totalApdGV++
             break;
           case "GTa":
             xObj.apd.GTa++;
             xObj.apd.total++;
+            totalsByProgram.totalApdGTa++
             break;
           case "GTe":
             xObj.apd.GTe++;
             xObj.apd.total++;
+            totalsByProgram.totalApdGTe++
             break;
           default:
             break;
         }
+        totalsByProgram.totalApd++
       }
 
       if (
@@ -225,20 +255,25 @@ export const MainDasboard = () => {
           case "GV":
             xObj.re.GV++;
             xObj.re.total++;
+            totalsByProgram.totalReGV++
             break;
           case "GTa":
             xObj.re.GTa++;
             xObj.re.total++;
+            totalsByProgram.totalReGTa++
             break;
           case "GTe":
             xObj.re.GTe++;
             xObj.re.total++;
+            totalsByProgram.totalReGTe++
             console.log(yObj);
             break;
           default:
             break;
         }
+        totalsByProgram.totalRe++
       }
+      xObj.totalByIG = xObj.apl.total+xObj.apd.total+xObj.re.total
     }
   });
 
@@ -305,30 +340,13 @@ export const MainDasboard = () => {
     }
   });
 
-  const handleFromDateChange = (value) => {
-    const selectedDate = dayJs(value).format('YYYY-MM-DD');
-    if (dayJs(selectedDate).isAfter(passedDateRange.toDate)) {
-      console.error("Selected date cannot be after toDate.");
-      return;
-    }
-    setPassedDateRange((prev) => ({
-      ...prev,
-      fromDate: selectedDate + " 00:00:00",
-    }));
-  };
+  totalsByProgram.totalMC = totalsByProgram.totalApl+ totalsByProgram.totalApd + totalsByProgram.totalRe
+  duplicatedIgCountArray.forEach((xObj) => {
+    xObj.totalByIG += xObj.apd.GV + xObj.apl.GV + xObj.re.GV;
+  });
+
   
-  const handleToDateChange = (value) => {
-    const selectedDate = dayJs(value).format('YYYY-MM-DD');
-    if (dayJs(selectedDate).isBefore(passedDateRange.fromDate)) {
-      console.error("Selected date cannot be before fromDate.");
-      return;
-    }
-    setPassedDateRange((prev) => ({
-      ...prev,
-      toDate: selectedDate + " 23:59:59",
-    }));
-  };
-  
+
   // const handleFromDateChange = (value) => {
   //   const updatedDateRange = { ...dateRange };
 
@@ -412,11 +430,10 @@ export const MainDasboard = () => {
           </Stack>
           <MainTable
             tableContent={duplicatedIgCountArray ? duplicatedIgCountArray : []}
+            totals = {totalsByProgram}
           />
         </div>
       )}
     </div>
   );
 };
-
-console.log("MainDashboard.jsx");

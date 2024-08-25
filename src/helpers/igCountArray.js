@@ -1,7 +1,7 @@
 export let igCountArray = [
   {
     id: 8723,
-    igName: "APIIT",
+    igName: "AIESEC in APIIT",
     apl: {
       GV: 0,
       GTa: 0,
@@ -20,10 +20,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
-    id: 38626,
-    igName: "ICBT",
+    id: 8986,
+    igName: "AIESEC in ICBT",
     apl: {
       GV: 0,
       GTa: 0,
@@ -42,10 +43,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 7997,
-    igName: "IIT",
+    igName: "AIESEC in IIT",
     apl: {
       GV: 0,
       GTa: 0,
@@ -64,10 +66,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 11136,
-    igName: "Jaffna",
+    igName: "AIESEC in Jaffna",
     apl: {
       GV: 0,
       GTa: 0,
@@ -86,10 +89,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 10231,
-    igName: "KDU",
+    igName: "AIESEC in KDU",
     apl: {
       GV: 0,
       GTa: 0,
@@ -108,10 +112,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 13991,
-    igName: "Rajarata",
+    igName: "AIESEC in Rajarata",
     apl: {
       GV: 0,
       GTa: 0,
@@ -130,10 +135,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 11570,
-    igName: "Saegis",
+    igName: "AIESEC in Saegis",
     apl: {
       GV: 0,
       GTa: 0,
@@ -152,10 +158,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 13106,
-    igName: "SLTC",
+    igName: "AIESEC in SLTC",
     apl: {
       GV: 0,
       GTa: 0,
@@ -174,10 +181,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 11127,
-    igName: "SUSL",
+    igName: "AIESEC in SUSL",
     apl: {
       GV: 0,
       GTa: 0,
@@ -196,10 +204,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 11119,
-    igName: "UWU",
+    igName: "AIESEC in UWU",
     apl: {
       GV: 0,
       GTa: 0,
@@ -218,10 +227,11 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 37260,
-    igName: "Vavuniya",
+    igName: "AIESEC in Vavuniya",
     apl: {
       GV: 0,
       GTa: 0,
@@ -243,7 +253,7 @@ export let igCountArray = [
   },
   {
     id: 13990,
-    igName: "Wayamba",
+    igName: "AIESEC in Wayamba",
     apl: {
       GV: 0,
       GTa: 0,
@@ -263,48 +273,5 @@ export let igCountArray = [
       total: 0,
     },
   },
-  {
-    id: 39484 ,
-    igName: "SKU",
-    apl: {
-      GV: 0,
-      GTa: 0,
-      GTe: 0,
-      total: 0,
-    },
-    apd: {
-      GV: 0,
-      GTa: 0,
-      GTe: 0,
-      total: 0,
-    },
-    re: {
-      GV: 0,
-      GTa: 0,
-      GTe: 0,
-      total: 0,
-    },
-  },
-  {
-    id: 39485 ,
-    igName: "EUSL",
-    apl: {
-      GV: 0,
-      GTa: 0,
-      GTe: 0,
-      total: 0,
-    },
-    apd: {
-      GV: 0,
-      GTa: 0,
-      GTe: 0,
-      total: 0,
-    },
-    re: {
-      GV: 0,
-      GTa: 0,
-      GTe: 0,
-      total: 0,
-    },
-  },
+ 
 ];
