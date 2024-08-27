@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { Stack, Button } from "@mui/material";
-import _ from "lodash";
-//import dayJs from "dayjs";
+import _, { set } from "lodash";
+import dayJs , { Dayjs }from "dayjs";
 
 import { useExpa } from "../hooks/useExpa";
 import { igCountArray } from "../helpers/igCountArray";
 import MainTable from "./MainTable";
 import LoadingCircle from "./LoadingCircle";
+import dayjs from "dayjs";
 
 export const MainDasboard = () => {
   const [personCommitteeValues] = useState(
@@ -38,53 +39,94 @@ export const MainDasboard = () => {
     toDate: "2024-05-31 23:59:59",
   });
 
-  //const [dateRange, setDateRange] = useState(passedDateRange);
+  
 
-  const {
-    error: errorApl,
-    data: dataApl,
-    loading: loadingApl,
-  } = useExpa(
-    isAplLoopFinished,
-    personCommitteeValues,
-    currentAplIndex,
-    "APL",
-    currentAplPage,
-    passedDateRange.fromDate,
-    passedDateRange.toDate
-  );
+  useEffect(() => {
+    const DateNow = new Date().toISOString();
+    const newDate = DateNow.slice(5, 10);
+  if (newDate >= "02-01") {
+    setPassedDateRange({
+      fromDate: DateNow.slice(0,4) +"-02-01 00:00:00",
+      toDate: DateNow.slice(0,13).replace("T", " ") + ":59",
+    });
+    
+  } else {
+    setPassedDateRange({
+      fromDate: (parseInt(DateNow.slice(0,4)) - 1) +"-02-01 00:00:00",
+      toDate: DateNow.slice(0,13).replace("T", " ") + ":59"
+  })
+  };
+}
+  , []);
 
-  const {
-    error: errorApd,
-    data: dataApd,
-    loading: loadingApd,
-  } = useExpa(
-    isApdLoopFinished,
-    personCommitteeValues,
-    currentApdIndex,
-    "APD",
-    currentApdPage,
-    passedDateRange.fromDate,
-    passedDateRange.toDate
-  );
 
-  const {
-    error: errorRe,
-    data: dataRe,
-    loading: loadingRe,
-  } = useExpa(
-    isReLoopFinished,
-    personCommitteeValues,
-    currentReIndex,
-    "RE",
-    currentRePage,
-    passedDateRange.fromDate,
-    passedDateRange.toDate
-  );
+  // const [dateRange, setDateRange] = useState(passedDateRange);
+  const [triggerRefetch, setTriggerRefetch] = useState(false);
+
+    let {
+      error: errorApl,
+      data: dataApl,
+      loading: loadingApl,
+    } = useExpa(
+      isAplLoopFinished,
+      personCommitteeValues,
+      currentAplIndex,
+      "APL",
+      currentAplPage,
+      passedDateRange.fromDate,
+      passedDateRange.toDate
+    );
+  
+    let {
+      error: errorApd,
+      data: dataApd,
+      loading: loadingApd,
+    } = useExpa(
+      isApdLoopFinished,
+      personCommitteeValues,
+      currentApdIndex,
+      "APD",
+      currentApdPage,
+      passedDateRange.fromDate,
+      passedDateRange.toDate
+    );
+  
+    let {
+      error: errorRe,
+      data: dataRe,
+      loading: loadingRe,
+    } = useExpa(
+      isReLoopFinished,
+      personCommitteeValues,
+      currentReIndex,
+      "RE",
+      currentRePage,
+      passedDateRange.fromDate,
+      passedDateRange.toDate
+    );
+    useEffect(() => {
+      if (triggerRefetch) {
+        setAplData([]);
+        setApdData([]);
+        setReData([]);
+        setCurrentAplPage(1);
+        setCurrentApdPage(1);
+        setCurrentRePage(1);
+        setCurrentAplIndex(0);
+        setCurrentApdIndex(0);
+        setCurrentReIndex(0);
+        setIsAplLoopFinished(false);
+        setIsApdLoopFinished(false);
+        setIsReLoopFinished(false);
+        setTriggerRefetch(false);
+      }
+
+    }, [triggerRefetch]);
+
 
   useEffect(() => {
     if (dataApl) {
-      setAplData([...aplData, ...dataApl.allOpportunityApplication.data]);
+      setAplData([...aplData, ...dataApl.allOpportunityApplication.data]);      
 
       const { paging } = dataApl.allOpportunityApplication;
 
@@ -141,7 +183,6 @@ export const MainDasboard = () => {
   useEffect(() => {
     if (dataRe) {
       setReData([...reData, ...dataRe.allOpportunityApplication.data]);
-
       const { paging } = dataRe.allOpportunityApplication;
 
       if (paging?.current_page < paging?.total_pages) {
@@ -166,9 +207,7 @@ export const MainDasboard = () => {
     isReLoopFinished,
   ]);
 
-  // console.log(aplData);
-  // console.log(apdData);
-  // console.log(reData);
+
 
   let duplicatedIgCountArray = _.cloneDeep(igCountArray);
 
@@ -182,6 +221,7 @@ export const MainDasboard = () => {
       if (yObj?.created_at) {
         switch (yObj.opportunity.programme.short_name_display) {
           case "GV":
+            
             xObj.apl.GV++;
             xObj.apl.total++;
             break;
@@ -233,7 +273,7 @@ export const MainDasboard = () => {
           case "GTe":
             xObj.re.GTe++;
             xObj.re.total++;
-            console.log(yObj);
+            // console.log(yObj);
             break;
           default:
             break;
@@ -272,6 +312,8 @@ export const MainDasboard = () => {
       }
     }
   });
+
+
 
   //Handles a scenario where the EP applied before the given date range but was realized within it.
   reData.forEach((yObj) => {
@@ -335,10 +377,36 @@ export const MainDasboard = () => {
 
   //console.log(passedDateRange);
 
-  // const handleFetch = () => {
-  //   setIsRefetch(true);
-  //   setPassedDateRange(dateRange);
-  // };
+  const handleFetch = () => {
+
+    if (passedDateRange.fromDate > passedDateRange.toDate) {
+      alert("From date cannot be after To date.");
+      // console.error("From date cannot be after To date.");
+      return;
+    }
+    setTriggerRefetch(prev => !prev); 
+
+  };
+
+  const handleReset = () => {
+    const DateNow = new Date().toISOString();
+    const newDate = DateNow.slice(5, 10);
+    if (newDate >= "02-01") {
+      setPassedDateRange({
+        fromDate: DateNow.slice(0,4) +"-02-01 00:00:00",
+        toDate: DateNow.slice(0,13).replace("T", " ") + ":59",
+      });
+      
+    } else {
+      setPassedDateRange({
+        fromDate: (parseInt(DateNow.slice(0,4)) - 1) +"-02-01 00:00:00",
+        toDate: DateNow.slice(0,13).replace("T", " ") + ":59"
+    })
+    };
+    setTriggerRefetch(prev => !prev); 
+
+
+  }
 
   //console.log(duplicatedIgCountArray);
   //console.log(passedDateRange);
@@ -361,16 +429,33 @@ export const MainDasboard = () => {
               label="Start Date"
               name="fromDate"
               slotProps={{ textField: { size: "small" } }}
-              //defaultValue={passedDateRange.fromDate}
-              //onChange={(v) => handleFromDateChange(v)}
+              onChange={(v)=>{
+                const formated = dayjs(v).format("YYYY-MM-DD 00:00:00");
+                setPassedDateRange(
+                  {
+                    fromDate: formated,
+                    toDate: passedDateRange.toDate
+                  }
+                )}              
+              }
+              defaultValue={dayjs(passedDateRange.fromDate.slice(0,10))}
             />
             <div>-</div>
             <DatePicker
               label="End Date"
               name="toDate"
               slotProps={{ textField: { size: "small" } }}
-              //defaultValue={passedDateRange.toDate}
-              //onChange={(v) => handleToDateChange(v)}
+              
+              onChange={(v)=>{
+                const formated = dayjs(v).format("YYYY-MM-DD 23:59:59");
+                setPassedDateRange(
+                  {
+                    fromDate: passedDateRange.fromDate,
+                    toDate: formated
+                  }
+                )}}
+                defaultValue={dayjs(passedDateRange.toDate.slice(0,10))}
+
             />
             <Button
               variant="outlined"
@@ -380,10 +465,23 @@ export const MainDasboard = () => {
                 minWidth: "80px",
                 minHeight: "40px",
               }}
-              //onClick={handleFetch}
+              onClick={handleFetch}
               disableElevation
             >
-              Fetch
+              Search
+            </Button>
+            <Button
+              variant="outlined"
+              style={{
+                maxWidth: "80px",
+                maxHeight: "40px",
+                minWidth: "80px",
+                minHeight: "40px",
+              }}
+              onClick={handleReset}
+              disableElevation
+            >
+              Reset
             </Button>
           </Stack>
           <MainTable
