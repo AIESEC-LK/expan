@@ -20,6 +20,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 8986,
@@ -42,6 +43,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 7997,
@@ -64,6 +66,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 11136,
@@ -86,6 +89,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    totalByIG: 0
   },
   {
     id: 10231,
@@ -108,6 +112,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 13991,
@@ -130,6 +135,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 11570,
@@ -152,6 +158,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 13106,
@@ -174,6 +181,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 11127,
@@ -196,6 +204,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 11119,
@@ -218,6 +227,7 @@ export let igCountArray = [
       GTe: 0,
       total: 0,
     },
+    total: 0
   },
   {
     id: 37260,
@@ -263,4 +273,5 @@ export let igCountArray = [
       total: 0,
     },
   },
+ 
 ];
