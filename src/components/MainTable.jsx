@@ -59,7 +59,7 @@ const MainTable = (props) => {
       <td>{element.re.GTe}</td>
       <td>{element.re.total}</td>
       
-      {/* <td>{element.totalByIG}</td> */}
+      <td>{element.totalByIG}</td>
     </tr>
 
   ));
