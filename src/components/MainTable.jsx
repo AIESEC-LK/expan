@@ -59,7 +59,7 @@ const MainTable = (props) => {
       <td>{element.re.GTe}</td>
       <td>{element.re.total}</td>
       
-      {/* <td>{element.totalByIG}</td> */}
+      <td>{element.totalByIG}</td>
     </tr>
 
   ));
@@ -102,11 +102,11 @@ const MainTable = (props) => {
             <th colSpan={4} style={{ textAlign: "center" }}>
               Realizations
             </th>
-            {/* <th rowSpan={2} style={{ textAlign: "center" }}>
+            <th rowSpan={2} style={{ textAlign: "center" }}>
               Total
              
               <ColumnSortBtn onClick={()=>sorting('totalByIG')} />
-            </th> */}
+            </th>
           </tr>
           <tr>
             <th >GV  <ColumnSortBtn onClick={() => sorting('apl.GV')} /> </th>
