@@ -46,9 +46,7 @@ const MainTable = (props) => {
   const rows = data.map((element) => (
     <tr key={element.id}>
       <th scope="row">{element.igName}</th>
-      <td>{element.apl.GV} 
-
-      </td>
+      <td>{element.apl.GV} </td>
       <td>{element.apl.GTa} </td>
       <td>{element.apl.GTe}</td>
       <td>{element.apl.total}</td>
@@ -61,7 +59,7 @@ const MainTable = (props) => {
       <td>{element.re.GTe}</td>
       <td>{element.re.total}</td>
       
-      <td>{element.totalByIG}</td>
+      {/* <td>{element.totalByIG}</td> */}
     </tr>
 
   ));
@@ -127,7 +125,7 @@ const MainTable = (props) => {
         </thead>
         <tbody>{rows}</tbody>
         
-        <TotalRow totals={totals} />
+        {/* <TotalRow totals={totals} /> */}
        
       </Table>
     </Sheet>
