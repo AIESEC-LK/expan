@@ -34,8 +34,8 @@ export const MainDasboard = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [passedDateRange, setPassedDateRange] = useState({
-    fromDate: "2024-07-01 00:00:00",
-    toDate: "2024-07-31 23:59:59",
+    fromDate: "2024-08-01 00:00:00",
+    toDate: "2024-08-31 23:59:59",
   });
 
   //const [dateRange, setDateRange] = useState(passedDateRange);
