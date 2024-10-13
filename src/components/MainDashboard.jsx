@@ -38,12 +38,18 @@ export const MainDasboard = () => {
 
 	// eslint-disable-next-line no-unused-vars
 	const [passedDateRange, setPassedDateRange] = useState(
-		localStorage.getItem("persisted_state_hook:selectedDates") ? JSON.parse(localStorage.getItem("persisted_state_hook:selectedDates"))?.dates ? JSON.parse(localStorage.getItem("persisted_state_hook:selectedDates")).dates : {
-			fromDate: dayJs().startOf("month").format("YYYY-MM-DD 00:00:00"),
-			toDate: dayJs().format("YYYY-MM-DD 23:59:59"),
-		}
+		localStorage.getItem("persisted_state_hook:selectedDates")
+			? JSON.parse(localStorage.getItem("persisted_state_hook:selectedDates"))?.dates
+				? JSON.parse(localStorage.getItem("persisted_state_hook:selectedDates")).dates
+				: {
+						fromDate: dayJs().startOf("month").format("YYYY-MM-DD 00:00:00"),
+						toDate: dayJs().format("YYYY-MM-DD 23:59:59"),
+				  }
+			: {
+					fromDate: dayJs().startOf("month").format("YYYY-MM-DD 00:00:00"),
+					toDate: dayJs().format("YYYY-MM-DD 23:59:59"),
+			  }
 	);
-	console.log(JSON.parse(localStorage.getItem("persisted_state_hook:selectedDates")).dates);
 
 	const [dateRange, setDateRange] = usePersistedState("dates", passedDateRange);
 
