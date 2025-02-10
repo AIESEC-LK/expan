@@ -143,10 +143,11 @@ export const useExpa = (
 		};
 	}
 
-	const { error, data, loading, refetch } = useQuery(GET_APPLICATIONS, {
-		variables: finalizedVariables,
-		skip: isLoopFinished,
-	});
+  const { error, data, loading } = useQuery(GET_APPLICATIONS, {
+    variables: finalizedVariables,
+    skip: isLoopFinished,
+  });
+
 
 	return {
 		error,
